@@ -72,6 +72,14 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    announcements: Announcement;
+    articles: Article;
+    stories: Story;
+    prayers: Prayer;
+    'team-members': TeamMember;
+    gallery: Gallery;
+    events: Event;
+    'error-pages': ErrorPage;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +102,14 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    announcements: AnnouncementsSelect<false> | AnnouncementsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    stories: StoriesSelect<false> | StoriesSelect<true>;
+    prayers: PrayersSelect<false> | PrayersSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'error-pages': ErrorPagesSelect<false> | ErrorPagesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -783,6 +799,184 @@ export interface Form {
   createdAt: string;
 }
 /**
+ * Manage the announcement banner shown at the top of every page
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements".
+ */
+export interface Announcement {
+  id: string;
+  message: string;
+  type: 'info' | 'warning' | 'success' | 'urgent';
+  icon?: string | null;
+  active?: boolean | null;
+  dismissible?: boolean | null;
+  ctaLabel?: string | null;
+  ctaLink?: string | null;
+  expiresAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage news articles, press releases, blog posts and events
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  coverImage: string | Media;
+  category: 'news' | 'press-release' | 'event' | 'blog' | 'impact';
+  featured?: boolean | null;
+  publishedAt: string;
+  author?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Review and approve stories submitted via the Share Your Story page
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stories".
+ */
+export interface Story {
+  id: string;
+  name?: string | null;
+  story: string;
+  role?: ('child' | 'guardian' | 'volunteer' | 'donor' | 'partner' | 'other') | null;
+  program?: ('child-care' | 'education' | 'healing' | 'community' | 'spiritual' | 'nutrition') | null;
+  photo?: (string | null) | Media;
+  anonymous?: boolean | null;
+  approved?: boolean | null;
+  featured?: boolean | null;
+  contactEmail?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Review and approve prayer requests submitted via the Prayer Wall
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prayers".
+ */
+export interface Prayer {
+  id: string;
+  prayer: string;
+  name?: string | null;
+  location?: string | null;
+  anonymous?: boolean | null;
+  approved?: boolean | null;
+  prayerCount?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage staff, board members and volunteers shown on the About page
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: string;
+  name: string;
+  position: string;
+  department?: ('leadership' | 'board' | 'programs' | 'finance' | 'comms' | 'field') | null;
+  bio?: string | null;
+  photo?: (string | null) | Media;
+  email?: string | null;
+  order?: number | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage photos shown across the website
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: string;
+  title: string;
+  image: string | Media;
+  description?: string | null;
+  category: 'programs' | 'events' | 'team' | 'community' | 'education' | 'nutrition' | 'spiritual';
+  featured?: boolean | null;
+  consentGiven?: boolean | null;
+  takenAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage upcoming events shown on the website
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  date: string;
+  endDate?: string | null;
+  location?: string | null;
+  image?: (string | null) | Media;
+  registrationLink?: string | null;
+  featured?: boolean | null;
+  free?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Customise the message shown on each error page
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "error-pages".
+ */
+export interface ErrorPage {
+  id: string;
+  code: '400' | '401' | '403' | '404' | '408' | '409' | '410' | '422' | '429' | '451' | '500' | '502' | '503' | '504';
+  title: string;
+  message: string;
+  emoji?: string | null;
+  maintenanceEnd?: string | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -991,6 +1185,38 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'announcements';
+        value: string | Announcement;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: string | Article;
+      } | null)
+    | ({
+        relationTo: 'stories';
+        value: string | Story;
+      } | null)
+    | ({
+        relationTo: 'prayers';
+        value: string | Prayer;
+      } | null)
+    | ({
+        relationTo: 'team-members';
+        value: string | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'error-pages';
+        value: string | ErrorPage;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1356,6 +1582,132 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcements_select".
+ */
+export interface AnnouncementsSelect<T extends boolean = true> {
+  message?: T;
+  type?: T;
+  icon?: T;
+  active?: T;
+  dismissible?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  expiresAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  content?: T;
+  coverImage?: T;
+  category?: T;
+  featured?: T;
+  publishedAt?: T;
+  author?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stories_select".
+ */
+export interface StoriesSelect<T extends boolean = true> {
+  name?: T;
+  story?: T;
+  role?: T;
+  program?: T;
+  photo?: T;
+  anonymous?: T;
+  approved?: T;
+  featured?: T;
+  contactEmail?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prayers_select".
+ */
+export interface PrayersSelect<T extends boolean = true> {
+  prayer?: T;
+  name?: T;
+  location?: T;
+  anonymous?: T;
+  approved?: T;
+  prayerCount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  department?: T;
+  bio?: T;
+  photo?: T;
+  email?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  description?: T;
+  category?: T;
+  featured?: T;
+  consentGiven?: T;
+  takenAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  date?: T;
+  endDate?: T;
+  location?: T;
+  image?: T;
+  registrationLink?: T;
+  featured?: T;
+  free?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "error-pages_select".
+ */
+export interface ErrorPagesSelect<T extends boolean = true> {
+  code?: T;
+  title?: T;
+  message?: T;
+  emoji?: T;
+  maintenanceEnd?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

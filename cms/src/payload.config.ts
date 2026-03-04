@@ -5,27 +5,31 @@ import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
+import { Media }      from './collections/Media'
+import { Pages }      from './collections/Pages'
+import { Posts }      from './collections/Posts'
+import { Users }      from './collections/Users'
+import { Footer }     from './Footer/config'
+import { Header }     from './Header/config'
+import { plugins }    from './plugins'
+import { defaultLexical }   from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { Announcements } from './collections/Announcements'
+import { Articles }      from './collections/Articles'
+import { Stories }       from './collections/Stories'
+import { Prayers }       from './collections/Prayers'
+import { TeamMembers }   from './collections/TeamMembers'
+import { Gallery }       from './collections/Gallery'
+import { Events }        from './collections/Events'
+import { ErrorPages }    from './collections/ErrorPages'
 
 const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const dirname  = path.dirname(filename)
 
 export default buildConfig({
   admin: {
     components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below.
-      beforeLogin: ['@/components/BeforeLogin'],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below.
+      beforeLogin:     ['@/components/BeforeLogin'],
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
@@ -34,33 +38,21 @@ export default buildConfig({
     user: Users.slug,
     livePreview: {
       breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
+        { label: 'Mobile',  name: 'mobile',  width: 375,  height: 667  },
+        { label: 'Tablet',  name: 'tablet',  width: 768,  height: 1024 },
+        { label: 'Desktop', name: 'desktop', width: 1440, height: 900  },
       ],
     },
   },
-  // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [
+    Pages, Posts, Media, Categories, Users,
+    Announcements, Articles, Stories, Prayers,
+    TeamMembers, Gallery, Events, ErrorPages,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,
