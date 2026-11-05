@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  --purple:        #6B2D8B;
+  --purple-light:  #8B4AAB;
+  --purple-dark:   #4A1D63;
+  --green:         #2E7D32;
+  --green-light:   #4CAF50;
+  --gold:          #F4C430;
+  --gold-dark:     #D4A017;
+  --orange:        #F57C00;
+  --red:           #C62828;
+  --blue:          #1A4B8C;
+  --white:         #FFFFFF;
+  --cream:         #FDFAF5;
+  --grey:          #F5F5F5;
+  --dark:          #1A1A2E;
+  --text:          #2D2D2D;
+  --text-light:    #666666;
+}
+
+/* ─── BASE RESET ─── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+  color: var(--purple);
+}
+
+h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; }
+h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; }
+h3 { font-size: clamp(20px, 3vw, 32px); font-weight: 700; }
+h4 { font-size: clamp(16px, 2vw, 22px); font-weight: 700; }
+
+p {
+  font-family: 'Lato', sans-serif;
+  color: var(--text-light);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--purple);
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+  background-color: var(--purple-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 45, 139, 0.35);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--purple);
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid var(--purple);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--purple);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  display: inline-block;
+  background-color: var(--gold);
+  color: var(--dark);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244, 196, 48, 0.4);
+}
+
+/* ─── LAYOUT ─── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: 12px;
+  font-family: 'Lato', sans-serif;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  color: var(--purple);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--text-light);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 50px;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--purple), var(--gold));
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(107, 45, 139, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(107, 45, 139, 0.15);
+}
+
+/* ─── SCRIPTURE BAND ─── */
+.scripture-band {
+  background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scripture-band::before {
+  content: '"';
+  font-family: 'Playfair Display', serif;
+  font-size: 300px;
+  color: rgba(255, 255, 255, 0.03);
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+}
+
+.scripture-band h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 40px);
+  color: var(--white);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.scripture-band h2 span { color: var(--gold); }
+
+.scripture-band p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  position: relative;
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.animate-fade-down { animation: fadeDown 0.8s ease forwards; }
+.animate-fade-up   { animation: fadeUp 0.8s ease forwards; }
+.animate-pulse-slow { animation: pulse 6s ease-in-out infinite; }
+.animate-float     { animation: float 4s ease-in-out infinite; }
+
+/* ─── RAINBOW BORDER ─── */
+.rainbow-border {
+  border: 3px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    conic-gradient(
+      var(--green),
+      var(--gold),
+      var(--orange),
+      var(--red),
+      var(--purple),
+      var(--blue),
+      var(--green)
+    ) border-box;
+  border-radius: 16px;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: linear-gradient(135deg, var(--dark), var(--purple-dark));
+  color: var(--white);
+  padding: 60px 24px 30px;
+}
+
+.footer h4 {
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 16px;
+}
+
+.footer p, .footer a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer a:hover { color: var(--gold); }
+
+/* ─── FORMS ─── */
+input, textarea, select {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: var(--white);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--purple);
+}
+
+/* ─── UTILITY ─── */
+.text-purple    { color: var(--purple); }
+.text-gold      { color: var(--gold); }
+.text-green     { color: var(--green); }
+.bg-cream       { background-color: var(--cream); }
+.bg-purple      { background-color: var(--purple); }
+.bg-gold        { background-color: var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .section { padding: 50px 16px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+}
+
+/* ─── HAMBURGER MOBILE ONLY ─── */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+@media (min-width: 768px) {
+  .hamburger { display: none !important; }
+  .mobile-menu { display: none !important; }
+  .desktop-links { display: flex !important; }
+}
+
+@media (max-width: 767px) {
+  .desktop-links { display: none !important; }
+}
